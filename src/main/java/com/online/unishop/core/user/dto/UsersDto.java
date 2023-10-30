@@ -1,5 +1,6 @@
-package com.online.unishop.core.dto;
+package com.online.unishop.core.user.dto;
 
+import com.online.unishop.core.role.dto.RoleDto;
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,5 @@ public class UsersDto implements Serializable {
     private String birthDate;
     private String phoneNumber;
     private String profileAvatar;
-    private String commentary;
-    private Role role;
+    private RoleDto roleDto;
 }

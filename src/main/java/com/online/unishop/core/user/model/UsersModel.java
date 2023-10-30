@@ -1,12 +1,13 @@
-package com.online.unishop.core.model;
+package com.online.unishop.core.user.model;
 
-import com.online.unishop.core.dto.UsersDto;
+import com.online.unishop.core.role.dto.RoleDto;
+import com.online.unishop.core.role.model.RoleModel;
+import com.online.unishop.core.user.dto.UsersDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
 
 @Entity
 @Table(name = "users")
@@ -38,11 +39,8 @@ public class UsersModel{
     @Column(name = "user_profileAvatar")
     private String profileAvatar;
 
-    @Column(name = "user_commentary")
-    private String commentary;
-
-    @Column(name = "user_role", nullable = false)
-    private Role role;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private RoleModel roleModel;
 
     public UsersDto toDto(){
         return new UsersDto(
@@ -53,8 +51,8 @@ public class UsersModel{
                 this.birthDate,
                 this.phoneNumber,
                 this.profileAvatar,
-                this.commentary,
-                this.role
+                this.roleModel
+                        .toDto()
         );
     }
 }
