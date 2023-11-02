@@ -30,11 +30,13 @@ public class CommentaryModel {
     @Column(name = "commentary_text",nullable = false)
     private String text;
 
+
     @ManyToOne(fetch = FetchType.EAGER)
     private TovarModel tovarModel;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private UsersModel usersModel;
+
 
     public CommentDto toDto(){
         return new CommentDto(

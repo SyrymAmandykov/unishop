@@ -27,5 +27,4 @@ public class TovarDto implements Serializable {
     private List<CatalogDto> catalog;
     private FilterDto filterDto;
     private UsersDto usersDto;
-    private List<CommentDto> commentaryDto;
 }

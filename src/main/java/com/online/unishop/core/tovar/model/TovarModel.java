@@ -46,10 +46,6 @@ public class TovarModel {
     @ManyToOne(fetch = FetchType.EAGER)
     private UsersModel usersModel;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<CommentaryModel> commentaryModel;
-
-
     public TovarDto toDto() {
         return new TovarDto(
                 this.id,
@@ -59,15 +55,11 @@ public class TovarModel {
                 this.catalogModel
                         .stream()
                         .map(CatalogModel::toDto)
-                        .collect(Collectors.toList()),
+                        .toList(),
                 this.filterModel
                         .toDto(),
                 this.usersModel
-                        .toDto(),
-                this.commentaryModel
-                        .stream()
-                        .map(CommentaryModel::toDto)
-                        .collect(Collectors.toList())
+                        .toDto()
         );
     }
 }
