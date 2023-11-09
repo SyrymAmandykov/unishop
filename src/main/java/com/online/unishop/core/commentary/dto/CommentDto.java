@@ -1,6 +1,5 @@
 package com.online.unishop.core.commentary.dto;
 
-import com.online.unishop.core.commentary.model.CommentaryModel;
 import com.online.unishop.core.tovar.dto.TovarDto;
 import com.online.unishop.core.user.dto.UsersDto;
 import lombok.AllArgsConstructor;
@@ -9,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor

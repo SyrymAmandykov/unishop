@@ -19,13 +19,13 @@ public class FilterModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "filter_name",nullable = false)
+    @Column(name = "filter_name", nullable = false)
     private String name;
 
-    public FilterDto toDto(){
+    public FilterDto toDto() {
         return new FilterDto(
-          this.id,
-          this.name
+                this.id,
+                this.name
         );
     }
 }

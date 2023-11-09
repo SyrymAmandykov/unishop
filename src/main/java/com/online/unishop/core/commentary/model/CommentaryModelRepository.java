@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CommentaryModelRepository extends JpaRepository<CommentaryModel,Long> {
-    List<CommentaryModel> findAllCommentsByTovarId(Long tovarId);
+public interface CommentaryModelRepository extends JpaRepository<CommentaryModel, Long> {
+    List<CommentaryModel> findAllByTovarModelId(Long tovarId);
 }

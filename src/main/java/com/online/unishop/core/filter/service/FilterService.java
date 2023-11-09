@@ -7,9 +7,16 @@ import java.util.List;
 
 public interface FilterService {
 
-    void addNewFilter(String name);
+    FilterDto addNewFilter(String name);
+
+    FilterDto getFilterByName(String name);
+
     List<FilterDto> getAllFilters();
+
     FilterDto getFilterById(Long id);
+
     FilterModel getFilterModelById(Long id);
+
     void deleteFilter(Long id);
+
 }

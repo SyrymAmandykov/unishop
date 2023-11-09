@@ -2,15 +2,21 @@ package com.online.unishop.core.catalog.service;
 
 
 import com.online.unishop.core.catalog.dto.CatalogDto;
-import com.online.unishop.core.catalog.model.CatalogModel;
 
 import java.util.List;
 
 public interface CatalogService {
 
-    void addNewCatalog(String name);
-    List<CatalogDto> getAllCatalog();
+    CatalogDto addNewCatalog(String name);
+
+    List<CatalogDto> getAllCatalogByIds(List<Long> ids);
+
     CatalogDto getCatalogById(Long id);
-    void updateCatalog(Long id,String name);
+    CatalogDto getCatalogByName(String name);
+
+    List<CatalogDto> getAllCatalogs();
+
+    void updateCatalog(Long id, String name);
+    void deleteCatalog(Long id);
 
 }

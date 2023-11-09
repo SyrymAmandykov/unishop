@@ -9,9 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Entity
 @Table(name = "commentary")
 @AllArgsConstructor
@@ -24,10 +21,10 @@ public class CommentaryModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "commentary_title",nullable = false)
+    @Column(name = "commentary_title", nullable = false)
     private String title;
 
-    @Column(name = "commentary_text",nullable = false)
+    @Column(name = "commentary_text", nullable = false)
     private String text;
 
 
@@ -38,7 +35,7 @@ public class CommentaryModel {
     private UsersModel usersModel;
 
 
-    public CommentDto toDto(){
+    public CommentDto toDto() {
         return new CommentDto(
                 this.id,
                 this.title,

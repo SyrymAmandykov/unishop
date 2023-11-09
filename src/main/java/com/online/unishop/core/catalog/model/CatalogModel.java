@@ -2,7 +2,10 @@ package com.online.unishop.core.catalog.model;
 
 import com.online.unishop.core.catalog.dto.CatalogDto;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "catalog")
@@ -16,13 +19,13 @@ public class CatalogModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "catalog_name",nullable = false)
+    @Column(name = "catalog_name", unique = true, nullable = false)
     private String name;
 
-    public CatalogDto toDto(){
+    public CatalogDto toDto() {
         return new CatalogDto(
-            this.id,
-            this.name
+                this.id,
+                this.name
         );
     }
 }

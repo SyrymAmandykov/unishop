@@ -1,7 +1,6 @@
 package com.online.unishop.core.user.model;
 
-import com.online.unishop.core.role.dto.RoleDto;
-import com.online.unishop.core.role.model.RoleModel;
+import com.online.unishop.core.role.Role;
 import com.online.unishop.core.user.dto.UsersDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class UsersModel{
+public class UsersModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,10 +38,10 @@ public class UsersModel{
     @Column(name = "user_profileAvatar")
     private String profileAvatar;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private RoleModel roleModel;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    public UsersDto toDto(){
+    public UsersDto toDto() {
         return new UsersDto(
                 this.id,
                 this.login,
@@ -51,8 +50,7 @@ public class UsersModel{
                 this.birthDate,
                 this.phoneNumber,
                 this.profileAvatar,
-                this.roleModel
-                        .toDto()
+                this.role
         );
     }
 }

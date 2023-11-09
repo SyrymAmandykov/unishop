@@ -1,7 +1,6 @@
 package com.online.unishop.core.tovar.model;
 
 import com.online.unishop.core.catalog.model.CatalogModel;
-import com.online.unishop.core.commentary.model.CommentaryModel;
 import com.online.unishop.core.filter.model.FilterModel;
 import com.online.unishop.core.tovar.dto.TovarDto;
 import com.online.unishop.core.user.model.UsersModel;
@@ -12,7 +11,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "tovar")

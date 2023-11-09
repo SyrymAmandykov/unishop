@@ -1,26 +1,22 @@
 package com.online.unishop.core.user.service;
 
-import com.online.unishop.core.role.dto.RoleDto;
-import com.online.unishop.core.role.model.RoleModel;
-import com.online.unishop.core.role.model.RoleModelRepository;
-import com.online.unishop.core.user.model.UsersModel;
+import com.online.unishop.core.role.Role;
 import com.online.unishop.core.user.dto.UsersDto;
+import com.online.unishop.core.user.model.UsersModel;
 import com.online.unishop.core.user.model.UsersModelRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class UsersServiceImplements implements UsersService{
+public class UsersServiceImplements implements UsersService {
 
     private final UsersModelRepository usersModelRepository;
-    private final RoleModelRepository roleModelRepository;
 
     /*Без Lombok @RequiredArgsConstructor это выглядело бы так:
-    public UsersServiceImplements(com.online.unishop.core.model.UsersModelRepository usersModelRepository) {
+    public UsersServiceImplements(UsersModelRepository usersModelRepository) {
         UsersModelRepository = usersModelRepository;
     }*/
 
@@ -32,8 +28,7 @@ public class UsersServiceImplements implements UsersService{
             String birthDate,
             String phoneNumber,
             String profileAvatar
-           )
-    {
+    ) {
 
         usersModelRepository.save(
                 new UsersModel(
@@ -44,7 +39,7 @@ public class UsersServiceImplements implements UsersService{
                         birthDate,
                         phoneNumber,
                         profileAvatar,
-                        null
+                        Role.USER
                 )
         );
     }
@@ -69,17 +64,15 @@ public class UsersServiceImplements implements UsersService{
     @Override
     public UsersDto getUserByLoginAndPassword(String login, String password) {
         return usersModelRepository
-                .findFirstByLoginAndPassword(login,password)
+                .findFirstByLoginAndPassword(login, password)
                 .toDto();
     }
 
     @Override
-    public void updateUser(Long id, String login, String password, String fullName, String birthDate, String phoneNumber, String profileAvatar, String roleName) {
+    public void updateUser(Long id, String login, String password, String fullName, String birthDate, String phoneNumber, String profileAvatar, Role role) {
         UsersModel updatedUserModel = usersModelRepository
                 .findById(id)
                 .orElseThrow();
-        RoleModel updatedRoleModel = roleModelRepository
-                .findByName(roleName);
 
         updatedUserModel.setLogin(login);
         updatedUserModel.setPassword(password);
@@ -87,7 +80,7 @@ public class UsersServiceImplements implements UsersService{
         updatedUserModel.setBirthDate(birthDate);
         updatedUserModel.setPhoneNumber(phoneNumber);
         updatedUserModel.setProfileAvatar(profileAvatar);
-        updatedUserModel.setRoleModel(updatedRoleModel);
+        updatedUserModel.setRole(role);
 
         usersModelRepository
                 .save(
@@ -96,7 +89,7 @@ public class UsersServiceImplements implements UsersService{
     }
 
     @Override
-    public void deleteUser(Long id) {
+    public void deleteUserById(Long id) {
         usersModelRepository
                 .deleteById(id);
     }

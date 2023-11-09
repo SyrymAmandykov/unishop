@@ -16,13 +16,19 @@ public class FilterServiceImplements implements FilterService {
     private final FilterModelRepository filterModelRepository;
 
     @Override
-    public void addNewFilter(String name) {
-        filterModelRepository
+    public FilterDto addNewFilter(String name) {
+        return filterModelRepository
                 .save(
                         new FilterModel(
                                 null,
                                 name)
-                );
+                ).toDto();
+    }
+
+    @Override
+    public FilterDto getFilterByName(String name){
+        return filterModelRepository.findByName(name)
+                .toDto();
     }
 
     @Override

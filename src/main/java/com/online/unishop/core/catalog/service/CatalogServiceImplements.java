@@ -11,27 +11,35 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class CatalogServiceImplements implements CatalogService{
+public class CatalogServiceImplements implements CatalogService {
 
     private final CatalogModelRepository catalogModelRepository;
 
     @Override
-    public void addNewCatalog(String name) {
-        catalogModelRepository.save(
+    public CatalogDto addNewCatalog(String name) {
+        return catalogModelRepository.save(
                 new CatalogModel(
                         null,
                         name
                 )
-        );
+        ).toDto();
     }
 
     @Override
-    public List<CatalogDto> getAllCatalog() {
+    public List<CatalogDto> getAllCatalogByIds(List<Long> ids) {
         return catalogModelRepository
-                .findAll()
+                .findAllByIdIn(ids)
                 .stream()
                 .map(CatalogModel::toDto)
-                .collect(Collectors.toList());
+                .toList();
+    }
+
+    @Override
+    public List<CatalogDto> getAllCatalogs(){
+        return catalogModelRepository.findAll()
+                .stream()
+                .map(CatalogModel::toDto)
+                .toList();
     }
 
     @Override
@@ -43,6 +51,14 @@ public class CatalogServiceImplements implements CatalogService{
     }
 
     @Override
+    public CatalogDto getCatalogByName(String name){ /* здесь мы ищем в бд каталог по имени и ставим доп условие,
+    Если у каталога name==null то верни просто null,если нет то пусть catalogModel запишет себе name ДТО */
+        CatalogModel catalogModel=  catalogModelRepository.findCatalogByName(name);
+
+        return catalogModel == null ? null: catalogModel.toDto();
+    }
+
+    @Override
     public void updateCatalog(Long id, String name) {
         CatalogModel updatedCatalogModel = catalogModelRepository
                 .findById(id)
@@ -51,5 +67,10 @@ public class CatalogServiceImplements implements CatalogService{
         updatedCatalogModel.setName(name);
 
         catalogModelRepository.save(updatedCatalogModel);
+    }
+
+    @Override
+    public void deleteCatalog(Long id){
+        catalogModelRepository.deleteById(id);
     }
 }

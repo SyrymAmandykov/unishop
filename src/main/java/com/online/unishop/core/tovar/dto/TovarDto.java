@@ -1,9 +1,6 @@
 package com.online.unishop.core.tovar.dto;
 
 import com.online.unishop.core.catalog.dto.CatalogDto;
-import com.online.unishop.core.catalog.model.CatalogModel;
-import com.online.unishop.core.commentary.dto.CommentDto;
-import com.online.unishop.core.commentary.model.CommentaryModel;
 import com.online.unishop.core.filter.dto.FilterDto;
 import com.online.unishop.core.user.dto.UsersDto;
 import lombok.AllArgsConstructor;

@@ -30,7 +30,7 @@ public class CommentaryServiceImplements implements CommentaryService {
     далее в строке 38 в бд  CommentaryModel
     мы создаем новый коммент
     */
-    public void addNewComment(String title,String text,Long userId,Long tovarId){
+    public void addNewComment(String title, String text, Long userId, Long tovarId) {
 
         TovarModel tovarModel = tovarModelRepository
                 .findById(tovarId)
@@ -50,16 +50,16 @@ public class CommentaryServiceImplements implements CommentaryService {
     }
 
     @Override
-    public List<CommentDto> getAllCommentsByTovarId(Long tovarId){
-       return commentaryModelRepository
-                .findAllCommentsByTovarId(tovarId)
+    public List<CommentDto> getAllCommentsByTovarId(Long tovarId) {
+        return commentaryModelRepository
+                .findAllByTovarModelId(tovarId)
                 .stream()
                 .map(CommentaryModel::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public void deleteComment(Long id){
+    public void deleteComment(Long id) {
         commentaryModelRepository.deleteById(id);
     }
 }
